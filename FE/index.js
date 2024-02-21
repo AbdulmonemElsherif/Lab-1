@@ -58,6 +58,20 @@ function createEmployee() {
     return; // Stop the function execution here
   }
 
+  // Validation for negative ID
+  if (parseInt(id) < 0) {
+    errorMessageElement.textContent = 'Employee ID cannot be negative.';
+    errorMessageElement.style.display = 'block';
+    return; // Stop the function execution here
+  }
+
+  // Validation for name length
+  if (name.length < 3 || name.length > 50) {
+    errorMessageElement.textContent = 'Employee name must be between 3 and 50 characters.';
+    errorMessageElement.style.display = 'block';
+    return; // Stop the function execution here
+  }
+
   // Clear the input fields after getting the values
   idInput.value = '';
   nameInput.value = '';
