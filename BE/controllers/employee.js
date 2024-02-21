@@ -21,8 +21,14 @@ exports.deleteEmployee = async (req, res, next) => {
 
 // Create an employee
 exports.createEmployee = async (req, res, next) => {
-  const { name } = req.body;
-  const id = (employees.length + 1).toString();
+  const { id, name } = req.body;
+
+  // Check if the ID already exists
+  const existingEmployee = employees.find(emp => emp.id === id);
+  if (existingEmployee) {
+    return res.status(400).json({ error: 'Employee ID already exists' });
+  }
+
   const newEmployee = { id, name };
   employees.push(newEmployee);
   res.status(201).json({ data: newEmployee });
